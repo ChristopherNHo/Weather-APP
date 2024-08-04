@@ -30,12 +30,12 @@ router.get("/about",function(req,response) {
     let apiUrl = 'http://api.openweathermap.org/geo/1.0/direct?q='+ parameters.cityInput + '&limit=1&appid='+ encodeURIComponent(parameters.api_key)
     console.log(apiUrl);
 
-    fetch(apiUrl)
-  .then(response => {
-    if (!response.ok) {
+    fetch(apiUrl) //fetch makes a request to the API URL 
+  .then(response => {  // handles response from server
+    if (!response.ok) {  //checks to make sure reponse is valid
       throw new Error('Network response was not ok');
     }
-    return response.json();
+    return response.json(); 
   })
   .then(data => {
     console.log(data);
