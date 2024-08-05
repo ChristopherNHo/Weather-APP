@@ -24,9 +24,26 @@ function responseData(data){
     console.log("COORDINATES");
     console.log("Latitude = " + data.data[0].lat);
     console.log("Longitude = " + data.data[0].lon);
+
+    $.ajax({
+      url: "/tempsearch",
+      type: "GET",
+      data: {latitude:data.data[0].lat, longitude:data.data[0].lon},
+      success: updateData
+  });
+
   }
 
 
+}
+
+function updateData(data){
+  console.log("ALERT CLIENT FUNCTION");
+  console.log(data.data);
+  $(".temp").text(data.data.main.temp + "°F");
+  $(".city").text(data.data.name);
+  $(".wind").text(data.data.wind.speed + " mph");
+  $(".humidity").text(data.data.main.humidity + "%");
 }
 
 $(document).ready(function(){        

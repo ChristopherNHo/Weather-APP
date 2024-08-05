@@ -5,7 +5,9 @@ let fetch = require("node-fetch");
 
 let parameters= {
     api_key: '3bb12c3b4cb2671fc6089cfa5332d1cd',
-    cityInput: 'Oceanside'
+    cityInput: 'Oceanside',
+    lat: 0,
+    lon: 0
 }
 
 
@@ -22,7 +24,7 @@ router.get("/about",function(req,response) {
   });
 
   router.get("/citysearch",function(req,res) {
-    console.log("GET REQUEST")
+    console.log("CITY API")
   
     parameters.cityInput = req.query.city;
     console.log(parameters.cityInput);
@@ -48,7 +50,39 @@ router.get("/about",function(req,response) {
     
   });
     
+  router.get("/tempsearch",function(req,res) {
+    console.log("TEMP API")
+  
+    parameters.lat = req.query.latitude;
+    parameters.lon = req.query.longitude;
+    console.log("Latitude = " + parameters.lat);
+    console.log("Longitude = " + parameters.lon);
+
     
+    let apiUrl2 = "https://api.openweathermap.org/data/2.5/weather?lat=" + parameters.lat + "&lon=" + parameters.lon + "&appid=" + parameters.api_key + "&units=imperial";
+    console.log(apiUrl2);
+
+    fetch(apiUrl2) //fetch makes a request to the API URL 
+  .then(response => {  // handles response from server
+    if (!response.ok) {  //checks to make sure reponse is valid
+      throw new Error('Network response was not ok');
+    }
+    return response.json(); 
+  })
+  .then(data => {
+    console.log("DATA");
+    console.log(data);
+    res.json({data : data});
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+
+    
+  });
+  
+
+
     
      
     module.exports = router;
