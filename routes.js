@@ -11,7 +11,6 @@ let parameters= {
 
 router.get("/",function(req,res) {
     var thePath = path.join(__dirname,"/public/views/index.html"); 
-    console.log(thePath);
      res.sendFile(thePath);	
 });
 
@@ -38,7 +37,9 @@ router.get("/about",function(req,response) {
     return response.json(); 
   })
   .then(data => {
+    console.log("DATA");
     console.log(data);
+    res.json({data : data});
   })
   .catch(error => {
     console.error('Error:', error);
@@ -47,26 +48,6 @@ router.get("/about",function(req,response) {
     
   });
     
-    router.post("/addfood",function(req,res) {
-    console.log("ADDED POST")
-    var temp = {foodName : req.body.foodName,calories: req.body.calories, fats: req.body.fats,carbs:req.body.carbs,proteins:req.body.proteins,sugars:req.body.sugars};
-    total[totalIndex] = temp;
-    totalIndex++;
-    res.json(total[totalIndex]);
-    
-    
-    });
-    router.get("/checktotal",function(req,res) {
-    console.log("CHECK GET");
-    if(total[0]==null){
-      res.json(null);
-    }
-    else{
-        res.json({total:total,index:totalIndex});
-      }
-    
-    
-    });
     
     
      
