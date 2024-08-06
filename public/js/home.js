@@ -44,6 +44,26 @@ function updateData(data){
   $(".city").text(data.data.name);
   $(".wind").text(data.data.wind.speed + " mph");
   $(".humidity").text(data.data.main.humidity + "%");
+
+  if(data.data.weather[0].id >= 200 && data.data.weather[0].id < 300 || data.data.weather[0].id >= 500 && data.data.weather[0].id < 600){
+    $(".weather-icon").attr("src","/images/rain.png");
+  }
+  else if(data.data.weather[0].id >= 300 && data.data.weather[0].id < 400){
+    $(".weather-icon").attr("src","/images/drizzle.png");
+  }
+  else if(data.data.weather[0].id >= 600 && data.data.weather[0].id < 700){
+    $(".weather-icon").attr("src","/images/snow.png");
+  }
+  else if(data.data.weather[0].id >= 700 && data.data.weather[0].id < 800){
+    $(".weather-icon").attr("src","/images/mist.png");
+  }
+  else if(data.data.weather[0].id == 800 || data.data.weather[0].id == 801){
+    $(".weather-icon").attr("src","/images/clear.png");
+  }
+  else if(data.data.weather[0].id > 801 &&  data.data.weather[0].id <= 804){
+    $(".weather-icon").attr("src","/images/clouds.png");
+  }
+  $(".weather").css({"display":"block"});
 }
 
 $(document).ready(function(){        

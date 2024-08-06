@@ -6,6 +6,13 @@
     font-family: 'BebasNeue';
     src: url('/fonts/BebasNeue-Regular.ttf');
   }
+  .title{
+    color:#fff;
+    font-size: 30px;
+    margin: auto;
+    text-align: center;
+    padding: 20px 20px;
+  }
   body{
     background: #222;
   }
@@ -14,7 +21,7 @@
     max-width: 470px;
     background: linear-gradient(to top right, #d8b027, #274FD8 );
     color: #fff;
-    margin: 100px;
+    margin: auto;
     border-radius: 10px;
     padding: 40px 40px;
     text-align: center;
@@ -83,5 +90,8 @@
     font-size: 28px;
     margin-top: -6px;
 
+}
+.weather{
+    display: none;
 }
 
