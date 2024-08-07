@@ -6,6 +6,23 @@
     font-family: 'BebasNeue';
     src: url('/fonts/BebasNeue-Regular.ttf');
   }
+  #navigation {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #075226;
+  
+  }
+  
+  #navigation li a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 25px;
+    text-decoration: none;
+  }
   .title{
     color:#fff;
     font-size: 30px;

@@ -16,11 +16,8 @@ router.get("/",function(req,res) {
      res.sendFile(thePath);	
 });
 
-router.get("/total",function(req,response) {
-    response.sendFile(__dirname + "/public/views/total.html");
-  });
-router.get("/about",function(req,response) {
-    response.sendFile(__dirname + "/public/views/about.html");
+router.get("/saved",function(req,response) {
+    response.sendFile(__dirname + "/public/views/saved.html");
   });
 
   router.get("/citysearch",function(req,res) {
@@ -70,8 +67,6 @@ router.get("/about",function(req,response) {
     return response.json(); 
   })
   .then(data => {
-    console.log("DATA");
-    console.log(data);
     res.json({data : data});
   })
   .catch(error => {

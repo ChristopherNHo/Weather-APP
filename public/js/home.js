@@ -39,11 +39,14 @@ function responseData(data){
 
 function updateData(data){
   console.log("ALERT CLIENT FUNCTION");
+  let inputDate = new Date();
   console.log(data.data);
   $(".temp").text(data.data.main.temp + "°F");
   $(".city").text(data.data.name);
   $(".wind").text(data.data.wind.speed + " mph");
   $(".humidity").text(data.data.main.humidity + "%");
+  const timeM = new Date().toLocaleString("en-US")
+  $(".time").text("As of " + timeM + " local time");
 
   if(data.data.weather[0].id >= 200 && data.data.weather[0].id < 300 || data.data.weather[0].id >= 500 && data.data.weather[0].id < 600){
     $(".weather-icon").attr("src","/images/rain.png");
