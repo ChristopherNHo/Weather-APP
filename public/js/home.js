@@ -1,3 +1,4 @@
+var map;
 
 function clicked(){
 var query = $("#searchbar").val();
@@ -40,6 +41,22 @@ function responseData(data){
 function updateData(data){
   console.log("ALERT CLIENT FUNCTION");
   let inputDate = new Date();
+  
+  map.locate({setView: true, maxZoom: 8});
+  var marker;
+
+  map.setView([data.data.coord.lat, data.data.coord.lon], 13);
+  marker = L.marker([data.data.coord.lat, data.data.coord.lon]).addTo(map);
+  
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+
+
+    map.setView([data.data.coord.lat, data.data.coord.lon], 13);
+    marker.bindPopup(data.data.coord.lat + ", " + data.data.coord.lon).openPopup();
+
   console.log(data.data);
   $(".temp").text(data.data.main.temp + "°F");
   $(".city").text(data.data.name);
@@ -69,7 +86,9 @@ function updateData(data){
   $(".weather").css({"display":"block"});
 }
 
-$(document).ready(function(){        
+$(document).ready(function(){      
+  
+  map =  L.map('map');
 
 	$("#searchbar").keydown( function( event ) {
         if ( event.which === 13 ) {
