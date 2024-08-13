@@ -42,10 +42,9 @@ function updateData(data){
   console.log("ALERT CLIENT FUNCTION");
   let inputDate = new Date();
   
-  map.locate({setView: true, maxZoom: 8});
   var marker;
 
-  map.setView([data.data.coord.lat, data.data.coord.lon], 13);
+  map.flyTo([data.data.coord.lat, data.data.coord.lon], 13);
   marker = L.marker([data.data.coord.lat, data.data.coord.lon]).addTo(map);
   
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -54,8 +53,7 @@ function updateData(data){
   }).addTo(map);
 
 
-    map.setView([data.data.coord.lat, data.data.coord.lon], 13);
-    marker.bindPopup(data.data.coord.lat + ", " + data.data.coord.lon).openPopup();
+    marker.bindPopup("Coordinates: (" + data.data.coord.lat + ", " + data.data.coord.lon + ") <br> Location Name: " + data.data.name).openPopup();
 
   console.log(data.data);
   $(".temp").text(data.data.main.temp + "°F");
@@ -63,7 +61,7 @@ function updateData(data){
   $(".wind").text(data.data.wind.speed + " mph");
   $(".humidity").text(data.data.main.humidity + "%");
   const timeM = new Date().toLocaleString("en-US")
-  $(".time").text("As of " + timeM + " local time");
+  $(".time").text("As of " + timeM);
 
   if(data.data.weather[0].id >= 200 && data.data.weather[0].id < 300 || data.data.weather[0].id >= 500 && data.data.weather[0].id < 600){
     $(".weather-icon").attr("src","/images/rain.png");
@@ -89,6 +87,7 @@ function updateData(data){
 $(document).ready(function(){      
   
   map =  L.map('map');
+  map.setView([39.8, -98.6], 13);
 
 	$("#searchbar").keydown( function( event ) {
         if ( event.which === 13 ) {

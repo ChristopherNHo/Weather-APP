@@ -2,6 +2,10 @@ let path = require("path");
 let express = require("express");
 let router = express.Router();
 let fetch = require("node-fetch");
+const myDatabase = require('./myDatabase');
+let db = new myDatabase();
+
+const Data = require('./Data');
 
 let parameters= {
     api_key: '3bb12c3b4cb2671fc6089cfa5332d1cd',
@@ -9,6 +13,7 @@ let parameters= {
     lat: 0,
     lon: 0
 }
+let totalIndex = 0;
 
 
 router.get("/",function(req,res) {
@@ -67,6 +72,8 @@ router.get("/saved",function(req,response) {
     return response.json(); 
   })
   .then(data => {
+    let obj = new Data(data.name, data.coord.lat, data.coord.lon, totalIndex++);
+    db.postData(obj)
     res.json({data : data});
   })
   .catch(error => {

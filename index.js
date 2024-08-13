@@ -3,6 +3,7 @@ let bodyParser = require('body-parser');
 let routes = require("./routes");
 let path = require('path');
 var mongoose = require("mongoose");
+mongoose.connect('mongodb://127.0.0.1:27017/cityDatabase');
 //mongoose.connect("mongodb://localhost/data");
 
 let app = express();
